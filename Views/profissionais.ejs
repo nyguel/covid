@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    
+   
+    <!-- <link href="css/sb-admin-2.min.css" rel="stylesheet"> -->
+    <!-- <link href="css/dataTables.bootstrap.min.css" rel="stylesheet"> -->
+      <!-- Custom fonts for this template -->
+  <link href="fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this page -->
+  <link href="datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/view-login.css" />
+    <title>Suporte Covid</title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">Suporte Covid</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto navbar-right">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Paciente
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/cadastro_paciente">Novo</a>
+              <a class="dropdown-item" href="/pacientes">Listar</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Profissional
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/cadastro_profissional">Novo</a>
+              <a class="dropdown-item" href="/profissionais">Listar</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Conta
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Senha</a>
+              <a class="dropdown-item" href="/logout">Deslogar</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <!-- Outer Row -->
+      <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+
+<br><br>
+  <div id="wrapper">          
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h5 class="m-0 font-weight-bold text-primary">Lista de Pacientes</h5>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Endereco</th>
+                      <th>Açoes</th>          
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for(var i=0; i < dados.length; i++) { %>
+                      <tr>
+                        <td><%= dados[i].paciente_nome %></td>
+                        <td><%= dados[i].paciente_endereco %></td>
+                      
+                        <td>
+                          <a class="material-icons md-24 md-dark" href="#" data-toggle="modal"
+                          data-target="#dadosPacientemodal">list_alt</a>
+          
+                          <a
+                            class="material-icons md-24 md-dark"
+                            href="#"
+                            data-toggle="modal"
+                            data-target="#dadosPacientemodal"
+                            >edit</a
+                          >
+                          <a class="material-icons md-24 md-dark" href="#"
+                            >directions_car</a
+                          >
+                        </td>
+                      </tr>
+                      <% } %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <div class="modal fade" id="dadosPacientemodal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Dados do Paciente</h5>
+                <button type="button" class="close" data-dismiss="modal"></button>
+                <span>&times;</span>
+            </div>
+            <div class="modal-body">
+              <h5 class="modal-title">Nome:</h5><br>
+              <h6 class="modal-title"></h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="jquery/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="datatables/jquery.dataTables.min.js"></script>
+  <script src="datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/datatables-demo.js"></script>
+  <script src="/js/jquery.mask.min.js"></script>
+</body>
+  
+  </body>
+</html>

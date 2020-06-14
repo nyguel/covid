@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <base href="/">
+    
+   
+    <!-- <link href="css/sb-admin-2.min.css" rel="stylesheet"> -->
+    <!-- <link href="css/dataTables.bootstrap.min.css" rel="stylesheet"> -->
+      <!-- Custom fonts for this template -->
+  <link href="fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this page -->
+  <link href="datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/view-login.css" />
+    <title>Suporte Covid</title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">Suporte Covid</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto navbar-right">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Paciente
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/cadastro_paciente">Novo</a>
+              <a class="dropdown-item" href="/pacientes">Listar</a>
+              <a class="dropdown-item" href="/pacientes"> Inserir Viagem</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Profissional
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/cadastro_profissional">Novo</a>
+              <a class="dropdown-item" href="/profissionais">Listar</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Conta
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Alterar senha</a>
+              <a class="dropdown-item" href="/logout">Deslogar</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+      <!-- Outer Row -->        
+        <!-- Begin Page Content -->
+
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-8">
+            <div class="card-header py-3 bg-white">
+              <h6 class=" text-primary">Viagens de:</h6>
+              <h3 class=" text-gray-dark"><%=pacientes.nome %> </h3>
+              <div class="navbar-right">
+                <button 
+                type="button"
+                 class="btn btn-primary float-right"
+                 data-id="<%= pacientes._id%>"
+                 data-toggle="modal"
+                 data-target="#inserirViagemModal"
+                 >Inserir Viagem</button>
+            </div>
+            </div> 
+
+                      
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Destino</th>
+                      <th>Data</th>   
+                      <th>Horário</th>        
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <% pacientes.viagens.forEach(function(paciente) { %>
+                      <tr>                        
+                        <td>  <%= paciente.destino %>   </td>
+                        <td > <%= paciente.data %> </td>
+                        <td > <%= paciente.hora %> </td>
+                      </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="inserirViagemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Inserir Viagem</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="/viagens" method="POST">          
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <legend>Data da viagem:</legend>
+                        <input
+                          name="data"
+                          type="text"
+                          class="form-control form-control-user modal-nascimento"
+                          placeholder="00/00/0000"
+                          data-mask="00/00/0000"
+                        />
+                      </div>
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <legend>Destino:</legend>
+                        <input
+                          name="destino"
+                          type="text"
+                          class="form-control form-control-user modal-fone"
+                          placeholder="Digite o destino aqui"
+                        />
+                        <input
+                          name="id"                    
+                          type="text"
+                          class="form-control form-control-user modal-id"
+                          
+                          style="visibility: hidden"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <legend>Horário:</legend>
+                        <input
+                          name="hora"
+                          type="text"
+                          class="form-control form-control-user modal-nascimento"
+                          placeholder="00:00:00"
+                          data-mask="00:00:00"
+                        />
+                      </div>
+                    </div>
+                  <button type="submit" class="btn btn-primary float-right">Enviar</button>
+                  </form>
+                </div>
+                
+                  
+                
+              </div>
+            </div>
+          </div>
+
+
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="jquery/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/jquery.mask.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="datatables/jquery.dataTables.min.js"></script>
+  <script src="datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/datatables-demo.js"></script>
+  <script>
+    $('#inserirViagemModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id') 
+
+    var modal = $(this)
+    modal.find('.modal-id').val(id)
+    })
+
+    
+  </script>
+
+
+
+
+
+</body>
+  
+  </body>
+</html>

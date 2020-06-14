@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Suporte Covid Itapitanga</title>
+    <meta content="" name="descriptison" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon" />
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Dosis:300,400,500,,600,700,700i|Lato:300,300i,400,400i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet" />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/vendor/venobox/venobox.css" rel="stylesheet" />
+    <link
+      href="assets/vendor/line-awesome/css/line-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/owl.carousel/assets/owl.carousel.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Suporte Covid</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Entrar</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- ======= Header ======= -->
+
+    <main id="main">
+      <!-- ======= Hero Section ======= -->
+      <section id="counts" class="counts">
+        <div class="container">
+          <div class="text-center title">
+            <h3>Boletim Covid</h3>
+          </div>
+
+          <div class="row counters">
+            <div class="col-lg-3 col-6 text-center">
+              <span data-toggle="counter-up"><%= boletim.confirmados %> </span>
+              <p>Confirmados</p>
+            </div>
+
+            <div class="col-lg-3 col-6 text-center">
+              <span data-toggle="counter-up"><%= boletim.suspeitos %></span>
+              <p>Suspeitos</p>
+            </div>
+
+            <div class="col-lg-3 col-6 text-center">
+              <span data-toggle="counter-up"><%= boletim.curados %></span>
+              <p>Curados</p>
+            </div>
+            <h2></h2>
+            <div class="col-lg-3 col-6 text-center">
+              <span data-toggle="counter-up"><%= boletim.resultado %></span>
+              <p>Aguardando Resultado</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="counts" class="counts">
+        <div class="container">
+          <div class="row">
+            <div
+              class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center"
+            >
+              <h1>Juntos vamos derrotar o Coronavirus</h1>
+              <h2>
+                Todos unidos pela informação e pela responsabilidade
+              </h2>
+            </div>
+            <div class="col-lg-6 order-1 order-lg-2 hero-img">
+              <img src="assets/img/hero-img.png" class="img-fluid" alt="" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- End Hero -->
+    </main>
+    <!-- End #main -->
+
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/venobox/venobox.min.js"></script>
+    <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+    <script src="assets/vendor/counterup/counterup.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
