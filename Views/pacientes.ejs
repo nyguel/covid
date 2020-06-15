@@ -1,593 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <base href="/">
-    
-   
+<%- include('partials/header.ejs'); %>
 
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-  rel="stylesheet">
-   <link
-     href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Dosis:300,400,500,,600,700,700i|Lato:300,300i,400,400i,700,700i"
-     rel="stylesheet"
-   />
-
-   <link
-     href="css/bootstrap.min.css"
-     rel="stylesheet"
-   />
-  
-
-  <!-- Custom styles for this page -->
-  
-    <title>Suporte Covid</title>
-  </head>
-
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="/main">Suporte Covid</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarResponsive"
-          aria-controls="navbarResponsive"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/main?token=<%= token %> "
-                >Inicio <span class="sr-only">(current)</span></a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="/main?token=<%= token %> "
-                data-toggle="modal"
-                data-target="#boletimModal"
-                >Boletim</a
-              >
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Pacientes
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a
-                  class="dropdown-item"
-                  href="/cadastro_paciente?token=<%= token %> "
-                  >Novo</a
-                >
-                <a
-                  class="dropdown-item"
-                  href="/pacientes?token=<%= token %> "
-                  >Listar</a
-                >
-                <a
-                  class="dropdown-item"
-                  href="/suspeitos?token=<%= token %> "
-                  >Suspeitos</a
-                >
-                <a
-                class="dropdown-item"
-                href="/quarentena?token=<%= token %> "
-                >Quarentena</a
-              >
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Conta
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/trocar-senha">Trocar senha</a>
-                <a class="dropdown-item" href="#">Sair</a>
-              </div>
-            </li>
-          </ul>
-        </div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-8">
+      <div class="card-header py-3 bg-white">
+        <h5 class="m-0 font-weight-bold text-dark">Lista de Pacientes</h5>
       </div>
-    </nav>
-    <br><br>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table
+            class="table table-bordered"
+            id="dataTable"
+            width="100%"
+            cellspacing="0"
+          >
+            <thead>
+              <tr>
+                <th>CPF</th>
+                <th>Nome</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% pacientes.forEach(function(paciente) { %>
+              <tr>
+                <td><%= paciente.cpf %></td>
+                <td><%= paciente.nome %></td>
 
-          <!-- DataTales Example -->
-          <div class="card shadow mb-8">
-            <div class="card-header py-3 bg-white">
-              <h5 class="m-0 font-weight-bold text-dark">Lista de Pacientes</h5>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>CPF</th>
-                      <th>Name</th>
-                      <th>Ações</th>          
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% pacientes.forEach(function(paciente) { %>
-                      <tr>
-                        <td > <%= paciente.cpf %> </td>
-                        <td > <%= paciente.nome %> </td>
-                      
-                        <td>
-                          <a data-nome="<%= paciente.nome %>" 
-                            data-cpf="<%= paciente.cpf %>"
-                            data-endereco="<%= paciente.endereco %>" 
-                            data-nascimento="<%= paciente.nascimento %>" 
-                            data-fone="<%= paciente.telefone %>" 
-                            class="material-icons md-24 md-dark" 
-                            href="#" 
-                            data-toggle="modal"
-                            href=""
-                            data-target="#dadosPacienteModal">list_alt</a>
-          
-                          <a data-nome="<%= paciente.nome %>" 
-                            data-cpf="<%= paciente.cpf %>"
-                            data-endereco="<%= paciente.endereco %>" 
-                            data-nascimento="<%= paciente.nascimento %>" 
-                            data-fone="<%= paciente.telefone %>"
-                            data-whatever="@<%= paciente.nome %>"
-                            class="material-icons md-24 md-dark"                  
-                            data-toggle="modal"
-                            data-target="#editPacienteModal"
-                            href=""
-                            >edit</a
-                          >
-                          <a 
-                          class="material-icons md-24 md-dark" 
-                          href="/viagens/?id=<%=paciente._id %> "
-                            >commute</a
-                          >
-                          <a 
-                          class="material-icons md-24 md-dark" 
-                          href=""
-                          data-toggle="modal"
-                          data-target="#suspeitoModal"
-                          data-id="<%= paciente._id %>" 
-                          data-suspeito="true" 
-                          data-token="<%= token %>" 
-                            >group_add</a
-                          >
-                          <a 
-                          class="material-icons md-24 md-dark" 
-                          data-id="<%= paciente._id %>" 
-                          data-target="#quarentenaModal"
-                          data-toggle="modal"
-                          data-quarentena="true" 
-                          data-token="<%= token %>"
-                          href=""
-                            >add_business</a>
-                        </td>
-                      </tr>
-                    <% }); %>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+                <td>
+                  <a
+                    data-nome="<%= paciente.nome %>"
+                    data-cpf="<%= paciente.cpf %>"
+                    data-endereco="<%= paciente.endereco %>"
+                    data-nascimento="<%= paciente.nascimento %>"
+                    data-fone="<%= paciente.telefone %>"
+                    class="material-icons md-24 md-dark"
+                    href="#"
+                    data-toggle="modal"
+                    href=""
+                    data-target="#dadosPacienteModal"
+                    >list_alt</a
+                  >
 
-          
-
-        <!-- /.container-fluid -->
-
-
-
-
-
-        <div class="modal fade" id="dadosPacienteModal" tabindex="-1" role="dialog">
-          <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                  <div class="modal-header bg-dark">
-                      <h5 class="modal-title text-white">Dados do Paciente</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="form-group">              
-                      <legend style="font-size: 15px;">CPF:</legend>                
-                      <h5 class="text-dark modal-cpf" ></h5>
-                      <hr />
-                    </div>
-                  
-                    <div class="form-group">              
-                      <legend style="font-size: 15px;">Nome:</legend>                
-                      <h5 class="text-dark modal-nome" ></h5>
-                      <hr />
-                    </div>
-                    <div class="form-group">
-                      <legend style="font-size: 15px;">Endereço:</legend>                
-                      <h5 class="text-dark modal-endereco"></h5>
-                      <hr />
-                    </div>
-                    <div class="form-group">
-                      <legend style="font-size: 15px;">Nascimento:</legend>                
-                      <h5 class="text-dark modal-nascimento" ></h5>
-                      <hr />
-                    </div>
-                    <div class="form-group">
-                      <legend style="font-size: 15px;">Telefone:</legend>                
-                      <h5 class="text-dark modal-fone"></h5>
-                      <hr />
-                    </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-
-      <div
-      class="modal fade"
-      id="quarentenaModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header bg-dark">
-            <h5 class="modal-title text-white" id="exampleModalLabel">
-              Paciente para Quarentena
-            </h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form action="/quarentena" method="POST" >
-              
-                <div class="form-group row">
-                  <div class="col-sm-6 mb-3 mb-sm-0">
-                    <legend>Data Inicio:</legend>
-                    <input
-                      name="inicio"
-                      type="text"
-                      class="form-control form-control-user modal-nascimento"
-                      placeholder="00/00/0000"
-                      data-mask="00/00/0000"
-                    />
-                  </div>
-                  <div class="col-sm-6 mb-3 mb-sm-0">
-                    <legend>Data Término:</legend>
-                    <input
-                      name="termino"
-                      type="text"
-                      class="form-control form-control-user modal-fone"
-                      id="exampleInputPassword"
-                      placeholder="00/00/0000"
-                      data-mask="00/00/0000"
-                    />
-                  </div>
-                  
-                </div>
-                <div class="col-sm-6 mb-3 mb-sm-0">
-                  
-                  <input
-                    name="id"
-                    type="hidden"
-                    min="0"
-                    class="form-control form-control-user modal-id"
-                  />
-                </div>
-                <div class="col-sm-6 mb-3 mb-sm-0">
-                  
-                  <input
-                  
-                    name="quarentena"
-                    type="hidden"
-                    min="0"
-                    class="form-control form-control-user modal-quarentena"
-                  />
-                </div>
-                <input type="text" value="<%= token %>" style="visibility: hidden;" />
-              
-
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Cancelar
-                </button>
-                <button type="submit" class="btn btn-dark">Enviar</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-      <div
-      class="modal fade"
-      id="suspeitoModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header bg-dark">
-            <h5 class="modal-title text-white" id="exampleModalLabel">
-              Suspeito
-            </h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <h5 class="text-dark modal-id" >Tem certeza que deseja definir este paciente como suspeito?</h5>
-            <form action="/suspeitos" method="POST" >
-              <div class="form-group row">
-                <div class="col-sm-6 mb-3 mb-sm-0">
-                  
-                  <input
-                    name="id"
-                    type="hidden"
-                    min="0"
-                    class="form-control form-control-user modal-id"
-                  />
-                </div>
-                <div class="col-sm-6 mb-3 mb-sm-0">
-                  
-                  <input
-                    name="suspeitos"
-                    type="hidden"
-                    min="0"
-                    class="form-control form-control-user modal-suspeito"
-                  />
-                </div>
-                <input type="text" value="<%= token %>" style="visibility: hidden;" />
-              </div>
-
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Cancelar
-                </button>
-                <button type="submit" class="btn btn-dark">Enviar</button>
-              </div>
-            </form>
-          </div>
+                  <a
+                    data-nome="<%= paciente.nome %>"
+                    data-cpf="<%= paciente.cpf %>"
+                    data-endereco="<%= paciente.endereco %>"
+                    data-nascimento="<%= paciente.nascimento %>"
+                    data-fone="<%= paciente.telefone %>"
+                    data-whatever="@<%= paciente.nome %>"
+                    class="material-icons md-24 md-dark"
+                    data-toggle="modal"
+                    data-target="#editPacienteModal"
+                    href=""
+                    >edit</a
+                  >
+                  <a
+                    class="material-icons md-24 md-dark"
+                    href="/viagens/?id=<%=paciente._id %> "
+                    >commute</a
+                  >
+                  <a
+                    class="material-icons md-24 md-dark"
+                    href=""
+                    data-toggle="modal"
+                    data-target="#suspeitoModal"
+                    data-id="<%= paciente._id %>"
+                    data-suspeito="true"
+                    data-token="<%= token %>"
+                    >group_add</a
+                  >
+                  <a
+                    class="material-icons md-24 md-dark"
+                    data-id="<%= paciente._id %>"
+                    data-target="#quarentenaModal"
+                    data-toggle="modal"
+                    data-quarentena="true"
+                    data-token="<%= token %>"
+                    href=""
+                    >add_business</a
+                  >
+                </td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
 
-<div class="modal fade" id="editPacienteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header bg-dark">
-        <h5 class="modal-title text-white" id="exampleModalLabel">Edição de Paciente</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <legend>CPF:</legend>
-            <input
-              name="cpf"
-              type="text"
-              class="form-control form-control-user modal-cpf"
-              value=""
-              placeholder="Digite aqui o nome"
-            />
-          </div>
-      
-          <div class="form-group">
-            <legend>Nome:</legend>
-            <input
-              name="nome"
-              type="text"
-              class="form-control form-control-user modal-nome"
-              value=""
-              placeholder="Digite aqui o nome"
-            />
-          </div>
-          <div class="form-group">
-            <legend>Endereço:</legend>
-            <input
-              name="endereco"
-              type="text"
-              class="form-control form-control-user modal-endereco"
-              id="exampleInputEmail"
-              placeholder="Digite aqui o endereço"
-            />
-          </div>
-
-          <div class="form-group row">
-            <div class="col-sm-6 mb-3 mb-sm-0">
-              <legend>Data de nascimento:</legend>
-              <input
-                name="nascimento"
-                type="text"
-                class="form-control form-control-user modal-nascimento"
-                placeholder="00/00/0000"
-                data-mask="00/00/0000"
-              />
-            </div>
-            <div class="col-sm-6 mb-3 mb-sm-0">
-              <legend>Telefone:</legend>
-              <input
-                name="telefone"
-                type="text"
-                class="form-control form-control-user modal-fone"
-                id="exampleInputPassword"
-                placeholder="(00) 00000-0000"
-                data-mask="(00) 00000-0000"
-              />
-            </div>
-            
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-dark">Enviar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="jquery/jquery.min.js"></script>
-  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="/js/jquery.mask.min.js"></script>
-  <!-- Core plugin JavaScript-->
-  <script src="jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
-
-  <!-- Page level plugins -->
-  <script src="datatables/jquery.dataTables.min.js"></script>
-  <script src="datatables/dataTables.bootstrap4.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="js/datatables-demo.js"></script>
-  <script>
-  </script>
-  <script>
-    $('#editPacienteModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var nome = button.data('nome') 
-    var fone = button.data('fone')
-    var endereco = button.data('endereco')
-    var nascimento = button.data('nascimento')
-    var cpf = button.data('cpf')
-
-    var modal = $(this)
-    modal.find('.modal-nome').val(nome)
-    modal.find('.modal-fone').val(fone)
-    modal.find('.modal-endereco').val(endereco)
-    modal.find('.modal-nascimento').val(nascimento)
-    modal.find('.modal-cpf').val(cpf)
-    })
-
-    
-  </script>
-
-<script>
-  $('#suspeitoModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var id = button.data('id') 
-  var suspeito = button.data('suspeito')
-  var token = button.data('token')
-
-  var modal = $(this)
-  modal.find('.modal-id').val(id)
-  modal.find('.modal-suspeito').val(suspeito)
-  modal.find('.modal-token').val(token)
- 
-  })
-
-  
-</script>
-<script>
-  $('#quarentenaModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var id = button.data('id') 
-  var quarentena = button.data('quarentena')
-  var token = button.data('token')
-
-  var modal = $(this)
-  modal.find('.modal-id').val(id)
-  modal.find('.modal-quarentena').val(quarentena)
-  modal.find('.modal-token').val(token)
- 
-  })
-
-  
-</script>
-
-  <script>
-$('#dadosPacienteModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var nome = button.data('nome') 
-    var fone = button.data('fone')
-    var endereco = button.data('endereco')
-    var nascimento = button.data('nascimento')
-    var cpf = button.data('cpf')
-
-    var modal = $(this)
-    modal.find('.modal-nome').text(nome)
-    modal.find('.modal-endereco').text(endereco)
-    modal.find('.modal-nascimento').text(nascimento)
-    modal.find('.modal-fone').text(fone)
-    modal.find('.modal-cpf').text(cpf)
-    })
-
-  </script>
-
-  </script>
-  <script>
-    $('#viagemPacienteModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var nome = button.data('viagem')     
-        var modal = $(this)
-        modal
-        .find('.modal-nascimento')
-        .html("")
-        })
-    
-      </script>
-  <script>
-    $(document).ready(function(){
-      
-    })
-  </script>
-
-
-</body>
-  
+    <%- include('partials/footer.ejs'); %>
   </body>
 </html>

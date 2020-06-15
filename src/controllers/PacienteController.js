@@ -7,7 +7,7 @@ module.exports = {
     const token = request.hash;
     try {
       const pacientes = await Paciente.find().populate("viagens");
-
+      //return response.send({ pacientes });
       return response.render("pacientes.ejs", { pacientes, token });
     } catch (error) {
       return response.status(400).send({ error });

@@ -1,129 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-
-    <title>Suporte Covid Itapitanga</title>
-    <meta content="" name="descriptison" />
-    <meta content="" name="keywords" />
-
-    <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon" />
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
-
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Dosis:300,400,500,,600,700,700i|Lato:300,300i,400,400i,700,700i"
-      rel="stylesheet"
-    />
-
-    <!-- Vendor CSS Files -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet" />
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
-    <link href="assets/vendor/venobox/venobox.css" rel="stylesheet" />
-    <link
-      href="assets/vendor/line-awesome/css/line-awesome.min.css"
-      rel="stylesheet"
-    />
-
-    <!-- =======================================================
-  * Template Name: Butterfly - v2.0.0
-  * Template URL: https://bootstrapmade.com/butterfly-free-bootstrap-theme/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-  </head>
-
-  <body>
-    <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-          <a class="navbar-brand" href="/main">Suporte Covid</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarResponsive"
-            aria-controls="navbarResponsive"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="/main?token=<%= token %> "
-                  >Inicio <span class="sr-only">(current)</span></a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  href="/main?token=<%= token %> "
-                  data-toggle="modal"
-                  data-target="#boletimModal"
-                  >Boletim</a
-                >
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Pacientes
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a
-                    class="dropdown-item"
-                    href="/cadastro_paciente?token=<%= token %> "
-                    >Novo</a
-                  >
-                  <a class="dropdown-item" href="/pacientes?token=<%= token %> "
-                    >Listar</a
-                  >
-                  <a class="dropdown-item" href="/suspeitos?token=<%= token %> "
-                    >Suspeitos</a
-                  >
-                  <a
-                    class="dropdown-item"
-                    href="/quarentena?token=<%= token %> "
-                    >Quarentena</a
-                  >
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Conta
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="/trocar-senha">Trocar senha</a>
-                  <a class="dropdown-item" href="#">Sair</a>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
-    <!-- Outer Row -->
-    <div class="container" style="width: 800px; margin-top: 70px;">
+<%- include('partials/header.ejs'); %>
       <div class="card shadow mb-8">
         <div class="card-header py-3 bg-white">
           <h5 class="m-0 font-weight-bold text-dark">
@@ -140,6 +15,7 @@
                 <legend style="font-size: 15px;">CPF:</legend>
                 <input
                   name="cpf"
+                  required
                   type="text"
                   class="form-control form-control-user"
                   id="exampleInputPassword"
@@ -154,6 +30,7 @@
               <input
                 name="nome"
                 type="text"
+                required
                 class="form-control form-control-user"
                 id="input_name"
                 placeholder="Digite aqui o nome"
@@ -162,6 +39,7 @@
             <div class="form-group">
               <legend style="font-size: 15px;">Endereço:</legend>
               <input
+                required
                 name="endereco"
                 type="text"
                 class="form-control form-control-user"
@@ -175,6 +53,7 @@
                 <input
                   name="nascimento"
                   type="text"
+                  required
                   class="form-control form-control-user"
                   id="exampleInputPassword"
                   placeholder="00/00/0000"
@@ -185,6 +64,7 @@
                 <legend style="font-size: 15px;">Telefone:</legend>
                 <input
                   name="telefone"
+                  required
                   type="text"
                   class="form-control form-control-user"
                   id="exampleInputPassword"
@@ -193,10 +73,10 @@
                 />
               </div>
               <div class="col-sm-6 mb-3 mb-sm-0">
-                <legend style="font-size: 15px;">Telefone:</legend>
+                <legend style="font-size: 15px;"></legend>
                 <input
                   name="token"
-                  type="text"
+                  type="hidden"
                   class="form-control form-control-user"
                   value="<%= token %> "
                   style="visibility: hidden;"
@@ -213,12 +93,11 @@
               <label class="custom-control-label" for="customCheck"
                 >Declarar suspeito para ser visitado pela equipe de enfermagem
               </label>
+              
             </div>
-
-            <br />
-            <button
-              onclick="submit()"
-              type="button"
+            <br>
+            <button              
+              type="submit"
               class="btn btn-dark btn-user btn-block"
             >
               Enviar
@@ -233,7 +112,6 @@
           <hr />
         </div>
       </div>
-    </div>
 
     <script src="jquery/jquery.min.js"></script>
     <script
