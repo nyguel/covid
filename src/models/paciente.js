@@ -16,6 +16,11 @@ const PacienteSchema = new mongoose.Schema({
     required: true,
     uppercase: true,
   },
+  bairro: {
+    type: String,
+    required: true,
+    uppercase: true,
+  },
   telefone: {
     type: String,
   },

@@ -15,7 +15,6 @@
       >
         <thead>
           <tr>
-            <th>CPF</th>
             <th>Nome</th>
             <th>Ações</th>
           </tr>
@@ -23,12 +22,12 @@
         <tbody>
           <% pacientes.forEach(function(paciente) { %>
           <tr>
-            <td><%= paciente.cpf %></td>
             <td><%= paciente.nome %></td>
 
             <td>
               <a
                 data-nome="<%= paciente.nome %>"
+                data-bairro="<%= paciente.bairro %>"
                 data-endereco="<%= paciente.endereco %>"
                 data-cpf="<%= paciente.cpf %>"
                 data-nascimento="<%= paciente.nascimento %>"

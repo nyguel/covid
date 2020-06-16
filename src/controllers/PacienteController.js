@@ -1,4 +1,3 @@
-const knex = require("../database/connection");
 const Paciente = require("../models/paciente");
 const Viagens = require("../models/viagem");
 
@@ -6,8 +5,7 @@ module.exports = {
   async index(request, response) {
     const token = request.hash;
     try {
-      const pacientes = await Paciente.find().populate("viagens");
-      //return response.send({ pacientes });
+      const pacientes = await Paciente.find();
       return response.render("pacientes.ejs", { pacientes, token });
     } catch (error) {
       return response.status(400).send({ error });
@@ -20,19 +18,22 @@ module.exports = {
         cpf,
         nome,
         endereco,
+        bairro,
         telefone,
         nascimento,
         attsuspeito,
       } = request.body;
+
       var suspeito;
       if (attsuspeito === "on") {
         suspeito = true;
       }
 
-      const paciente = await Paciente.create({
+      await Paciente.create({
         cpf,
         nome,
         endereco,
+        bairro,
         telefone,
         nascimento,
         suspeito,
@@ -48,8 +49,10 @@ module.exports = {
   },
   async delete(request, response) {
     try {
-      await Paciente.findByIdAndDelete(request.params.id);
-      response.send({ Mensagem: "Paciente excluído com sucesso" });
+      const token = request.hash;
+      await Paciente.findByIdAndDelete(request.query.id);
+      const pacientes = await Paciente.find();
+      return response.render("pacientes.ejs", { pacientes, token });
     } catch (error) {
       return response
         .status(400)
@@ -62,41 +65,26 @@ module.exports = {
         cpf,
         nome,
         endereco,
+        bairro,
         telefone,
         nascimento,
-        suspeito,
-        viagens,
-        quarentena,
-        quarentena_inicio,
-        quarentena_fim,
+        id,
       } = request.body;
-
-      const paciente = await Paciente.findByIdAndUpdate(
-        request.params.id,
+      const token = request.hash;
+      await Paciente.findByIdAndUpdate(
+        id,
         {
           cpf,
           nome,
           endereco,
           telefone,
           nascimento,
-          suspeito,
-          quarentena,
-          quarentena_inicio,
-          quarentena_fim,
+          bairro,
         },
         { new: true }
       );
-      paciente.viagens = [];
-      await Viagens.remove({ paciente: paciente._id });
-      await Promise.all(
-        viagens.map(async (viagem) => {
-          const novaViagem = new Viagens({ ...viagem, paciente: paciente._id });
-          await novaViagem.save();
-          paciente.viagens.push(novaViagem);
-        })
-      );
-      await paciente.save();
-      response.send({ Mensagem: "Paciente atualizado com sucesso" });
+      const pacientes = await Paciente.find();
+      return response.render("pacientes.ejs", { pacientes, token });
     } catch (error) {
       console.log(error);
       return response

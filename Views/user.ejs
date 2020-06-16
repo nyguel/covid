@@ -1,277 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<%- include('partials/header.ejs'); %>
 
-    <title>Suporte Covid Itapitanga</title>
-    <meta content="" name="descriptison" />
-    <meta content="" name="keywords" />
-
-    <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon" />
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
-
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Dosis:300,400,500,,600,700,700i|Lato:300,300i,400,400i,700,700i"
-      rel="stylesheet"
-    />
-
-    <!-- Vendor CSS Files -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet" />
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
-    <link href="assets/vendor/venobox/venobox.css" rel="stylesheet" />
-    <link
-      href="assets/vendor/line-awesome/css/line-awesome.min.css"
-      rel="stylesheet"
-    />
-
-    <!-- =======================================================
-  * Template Name: Butterfly - v2.0.0
-  * Template URL: https://bootstrapmade.com/butterfly-free-bootstrap-theme/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-  </head>
-
-  <body>
-    <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-          <a class="navbar-brand" href="/main">Suporte Covid</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarResponsive"
-            aria-controls="navbarResponsive"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="/main?token=<%= token %> "
-                  >Inicio <span class="sr-only">(current)</span></a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  href="/main?token=<%= token %> "
-                  data-toggle="modal"
-                  data-target="#boletimModal"
-                  >Boletim</a
-                >
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Pacientes
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a
-                    class="dropdown-item"
-                    href="/cadastro_paciente?token=<%= token %> "
-                    >Novo</a
-                  >
-                  <a class="dropdown-item" href="/pacientes?token=<%= token %> "
-                    >Listar</a
-                  >
-                  <a class="dropdown-item" href="/suspeitos?token=<%= token %> "
-                    >Suspeitos</a
-                  >
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Conta
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Trocar senha</a>
-                  <a class="dropdown-item" href="#">Sair</a>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
-    <!-- Outer Row -->
-    <div class="container" style="width: 800px; margin-top: 70px;">
-      <div class="card shadow mb-8">
-        <div class="card-header py-3 bg-white">
-          <h5 class="m-0 font-weight-bold text-dark">
-            Definição de senha
-          </h5>
-        </div>
-        <div class="card-body p-0"></div>
-        <!-- Nested Row within Card Body -->
-
-        <div class="p-5">
-          <form class="user" method="POST" action="/pacientes">
-            <div class="form-group row">
-              <div class="col-sm-6 mb-3 mb-sm-0">
-                <legend style="font-size: 15px;">CPF:</legend>
-                <input
-                  name="cpf"
-                  type="text"
-                  class="form-control form-control-user"
-                  id="exampleInputPassword"
-                  placeholder="000.000.000-00"
-                  data-mask="000.000.000-00"
-                />
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-6 mb-3 mb-sm-0">
-                <legend style="font-size: 15px;">CPF:</legend>
-                <input
-                  name="cpf"
-                  type="text"
-                  class="form-control form-control-user"
-                  id="exampleInputPassword"
-                  placeholder="000.000.000-00"
-                  data-mask="000.000.000-00"
-                />
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-6 mb-3 mb-sm-0">
-                <legend style="font-size: 15px;">CPF:</legend>
-                <input
-                  name="cpf"
-                  type="text"
-                  class="form-control form-control-user"
-                  id="exampleInputPassword"
-                  placeholder="000.000.000-00"
-                  data-mask="000.000.000-00"
-                />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <legend style="font-size: 15px;">Nome:</legend>
-              <input
-                name="nome"
-                type="text"
-                class="form-control form-control-user"
-                id="input_name"
-                placeholder="Digite aqui o nome"
-              />
-            </div>
-            <div class="form-group">
-              <legend style="font-size: 15px;">Endereço:</legend>
-              <input
-                name="endereco"
-                type="text"
-                class="form-control form-control-user"
-                id="exampleInputEmail"
-                placeholder="Digite aqui o endereço"
-              />
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-6 mb-3 mb-sm-0">
-                <legend style="font-size: 15px;">Data de nascimento:</legend>
-                <input
-                  name="nascimento"
-                  type="text"
-                  class="form-control form-control-user"
-                  id="exampleInputPassword"
-                  placeholder="00/00/0000"
-                  data-mask="00/00/0000"
-                />
-              </div>
-              <div class="col-sm-6 mb-3 mb-sm-0">
-                <legend style="font-size: 15px;">Telefone:</legend>
-                <input
-                  name="telefone"
-                  type="text"
-                  class="form-control form-control-user"
-                  id="exampleInputPassword"
-                  placeholder="(00) 00000-0000"
-                  data-mask="(00) 00000-0000"
-                />
-              </div>
-            </div>
-
-            <br />
-            <button
-              onclick="submit()"
-              type="button"
-              class="btn btn-dark btn-user btn-block"
-            >
-              Enviar
-            </button>
-            <% if (msg[0].texto) { %>
-            <div class="alert alert-success text-center">
-              <%=msg[0].texto%>
-            </div>
-            <% } %>
-            <hr />
-            <input value="123 " nome="token" type="hidden" />
-          </form>
-          <hr />
-        </div>
-      </div>
+<div class="card shadow mb-8">
+  <div class="card-header py-3 bg-white">
+    <h6 class="text-primary">Viagens de:</h6>
+    <h3 class="text-gray-dark"><%=pacientes.nome %></h3>
+    <div class="navbar-right">
+      <button
+        type="button"
+        class="btn btn-dark float-right"
+        data-id="<%= pacientes._id%>"
+        data-toggle="modal"
+        data-target="#inserirViagemModal"
+      >
+        Inserir Viagem
+      </button>
     </div>
+  </div>
 
-    <script src="jquery/jquery.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-    <script src="/js/jquery.mask.min.js"></script>
-    <script>
-      function validaForm() {
-        let nome = "";
-        return false;
-      }
-    </script>
-    <script>
-      function formSubmit() {
-        let dado = {
-          nome: "nyguel",
-        };
-        fetch("http://localhost:3333/pacientes", {
-          method: "POST",
-          body: JSON.stringify(dado),
-        });
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered"
+        id="dataTable"
+        width="100%"
+        cellspacing="0"
+      >
+        <thead>
+          <tr>
+            <th>Destino</th>
+            <th>Data</th>
+            <th>Horário</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% pacientes.viagens.forEach(function(paciente) { %>
+          <tr>
+            <td><%= paciente.destino %></td>
+            <td><%= paciente.data %></td>
+            <td><%= paciente.hora %></td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-        /*
-      $.ajax({
-          url: "http://localhost:3333/pacientes",
-          method: 'POST',
-          data: {"nome":"nyguel"},
-          dataType: 'json',
-        });*/
-      }
-    </script>
-  </body>
-</html>
+<%- include("partials/footer.ejs");%>

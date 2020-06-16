@@ -1,12 +1,11 @@
 const User = require("../models/user");
-
+const bcrypt = require("bcrypt");
 module.exports = {
   async index(request, response) {
     const token = request.hash;
     try {
-      const user = await User.findByIdAndUpdate({});
-
-      return response.render("user.ejs", { user, token });
+      const users = await User.find();
+      return response.render("Usuarios.ejs", { users, token });
     } catch (error) {
       return response.status(400).send({ error });
     }
@@ -14,27 +13,8 @@ module.exports = {
 
   async create(request, response) {
     try {
-      const {
-        cpf,
-        nome,
-        endereco,
-        telefone,
-        nascimento,
-        attsuspeito,
-      } = request.body;
-      var suspeito;
-      if (attsuspeito === "on") {
-        suspeito = true;
-      }
-
-      const paciente = await Paciente.create({
-        cpf,
-        nome,
-        endereco,
-        telefone,
-        nascimento,
-        suspeito,
-      });
+      const {} = request.body;
+      const user = await Paciente.create({});
       const token = request.hash;
       return response.render("cadastroPaciente.ejs", { token });
     } catch (error) {
@@ -46,8 +26,11 @@ module.exports = {
   },
   async delete(request, response) {
     try {
-      await Paciente.findByIdAndDelete(request.params.id);
-      response.send({ Mensagem: "Paciente excluído com sucesso" });
+      const token = request.hash;
+
+      await User.findByIdAndDelete(request.params.id);
+      const users = await User.find();
+      return response.render("Usuarios.ejs", { users, token });
     } catch (error) {
       return response
         .status(400)
@@ -56,45 +39,17 @@ module.exports = {
   },
   async put(request, response) {
     try {
-      const {
-        cpf,
-        nome,
-        endereco,
-        telefone,
-        nascimento,
-        suspeito,
-        viagens,
-        quarentena,
-        quarentena_inicio,
-        quarentena_fim,
-      } = request.body;
-
-      const paciente = await Paciente.findByIdAndUpdate(
-        request.params.id,
-        {
-          cpf,
-          nome,
-          endereco,
-          telefone,
-          nascimento,
-          suspeito,
-          quarentena,
-          quarentena_inicio,
-          quarentena_fim,
-        },
+      const { senha, id } = request.body;
+      const token = request.hash;
+      const password = await bcrypt.hash(senha, 10);
+      const user = await User.findByIdAndUpdate(
+        id,
+        { senha: password },
         { new: true }
       );
-      paciente.viagens = [];
-      await Viagens.remove({ paciente: paciente._id });
-      await Promise.all(
-        viagens.map(async (viagem) => {
-          const novaViagem = new Viagens({ ...viagem, paciente: paciente._id });
-          await novaViagem.save();
-          paciente.viagens.push(novaViagem);
-        })
-      );
-      await paciente.save();
-      response.send({ Mensagem: "Paciente atualizado com sucesso" });
+      console.log(user);
+      const users = await User.find();
+      return response.render("Usuarios.ejs", { users, token });
     } catch (error) {
       console.log(error);
       return response

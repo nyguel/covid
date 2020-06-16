@@ -5,21 +5,26 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const authConfig = require("../config/auth.json");
 const Boletim = require("../models/boletim");
+const Paciente = require("../models/paciente");
 
 router.post("/registrar", async (req, res) => {
-  const nome = req.body.nome;
+  const token = req.hash;
+  const { nome, privilegio, usuario, senha } = req.body;
+
   try {
-    if (await User.findOne({ nome }))
+    if (await User.findOne({ usuario }))
       return res.status(400).send({ error: "Usuário já existente" });
 
-    const senha = await bcrypt.hash(req.body.senha, 10);
+    const password = await bcrypt.hash(senha, 10);
     const body = {
-      nome: req.body.nome,
-      senha: senha,
+      nome: nome,
+      usuario: usuario,
+      senha: password,
+      privilegio: privilegio,
     };
-    const user = await User.create(body);
-    user.senha = undefined;
-    return res.send(user);
+    await User.create(body);
+    const users = await User.find();
+    return res.render("Usuarios.ejs", { users, token });
   } catch (err) {
     return res.status(400).send({ error: "Falha ao registrar" });
   }
@@ -33,8 +38,8 @@ router.get("/", async function (req, res) {
 });
 
 router.post("/login", async (req, res) => {
-  const { nome, senha } = req.body;
-  const user = await User.findOne({ nome }).select("+senha");
+  const { usuario, senha } = req.body;
+  const user = await User.findOne({ usuario }).select("+senha");
 
   if (!user) {
     res.status(400).send({ error: "Usuário não encontrado" });
@@ -43,9 +48,10 @@ router.post("/login", async (req, res) => {
   } else {
     user.senha = undefined;
     const token = jwt.sign({ id: user.id }, authConfig.secret, {
-      expiresIn: 3600,
+      expiresIn: 36000,
     });
     const userid = user.id;
+    const pacientes = await Paciente.find();
     res.render("Main.ejs", { userid, token });
   }
 });

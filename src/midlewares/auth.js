@@ -2,10 +2,8 @@ const jwt = require("jsonwebtoken");
 const authConfig = require("../config/auth.json");
 
 module.exports = (req, res, next) => {
-  var authHeaders = req.query.token;
-  if (!authHeaders) {
-    authHeaders = req.body.token;
-  }
+  var authHeaders = req.body.confirmados;
+  console.log(authHeaders);
   if (!authHeaders) {
     return res.status(401).send({ error: "Sem token fornecido" });
   }
@@ -13,9 +11,10 @@ module.exports = (req, res, next) => {
     if (err) {
       console.log(err);
       return res.status(401).send({ error: "Token inválido" });
+    } else {
+      req.userId = decoded.id;
+      req.hash = authHeaders;
+      return next();
     }
-    req.userId = decoded.id;
-    req.hash = authHeaders;
-    return next();
   });
 };

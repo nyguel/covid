@@ -1,5 +1,5 @@
 <%- include('partials/header.ejs'); %>
-
+<ul class="resultado"></ul>
     <!-- DataTales Example -->
     <div class="card shadow mb-8">
       <div class="card-header py-3 bg-white">
@@ -15,7 +15,6 @@
           >
             <thead>
               <tr>
-                <th>CPF</th>
                 <th>Nome</th>
                 <th>Ações</th>
               </tr>
@@ -23,12 +22,11 @@
             <tbody>
               <% pacientes.forEach(function(paciente) { %>
               <tr>
-                <td><%= paciente.cpf %></td>
                 <td><%= paciente.nome %></td>
-
                 <td>
                   <a
                     data-nome="<%= paciente.nome %>"
+                    data-bairro="<%= paciente.bairro %>"
                     data-cpf="<%= paciente.cpf %>"
                     data-endereco="<%= paciente.endereco %>"
                     data-nascimento="<%= paciente.nascimento %>"
@@ -43,11 +41,12 @@
 
                   <a
                     data-nome="<%= paciente.nome %>"
+                    data-id="<%= paciente._id %>"
                     data-cpf="<%= paciente.cpf %>"
                     data-endereco="<%= paciente.endereco %>"
                     data-nascimento="<%= paciente.nascimento %>"
                     data-fone="<%= paciente.telefone %>"
-                    data-whatever="@<%= paciente.nome %>"
+                    data-bairro="<%= paciente.bairro %>"
                     class="material-icons md-24 md-dark"
                     data-toggle="modal"
                     data-target="#editPacienteModal"
@@ -79,6 +78,15 @@
                     href=""
                     >add_business</a
                   >
+                  <a
+                    class="material-icons md-24 md-dark"
+                    data-id="<%= paciente._id %>"
+                    data-target="#excluirPacienteModal"
+                    data-toggle="modal"
+                    data-token="<%= token %>"
+                    href=""
+                    >delete</a
+                  >
                 </td>
               </tr>
               <% }); %>
@@ -89,5 +97,6 @@
     </div>
 
     <%- include('partials/footer.ejs'); %>
+    
   </body>
 </html>

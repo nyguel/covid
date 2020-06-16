@@ -1,0 +1,74 @@
+<div class="row" style="padding: 20px;">
+  <% pacientes.forEach(function(paciente) { %>
+  <div class="col-lg-4 mb-4">
+    <div class="card h-100">
+      <h5 class="card-header text-white bg-dark"><%= paciente.nome %></h5>
+      <div class="card-body">
+        <p class="card-text">
+          <legend style="font-size: 12px;">
+            CPF: <%= paciente.cpf %>
+          </legend>
+
+          <legend style="font-size: 12px;">
+            Endereço: <%= paciente.endereco %>
+          </legend>
+        </p>
+      </div>
+      <div class="card-footer">
+        <a
+          data-nome="<%= paciente.nome %>"
+          data-cpf="<%= paciente.cpf %>"
+          data-endereco="<%= paciente.endereco %>"
+          data-nascimento="<%= paciente.nascimento %>"
+          data-fone="<%= paciente.telefone %>"
+          class="material-icons md-30 md-dark"
+          href="#"
+          data-toggle="modal"
+          href=""
+          data-target="#dadosPacienteModal"
+          >list_alt</a
+        >
+
+        <a
+          data-nome="<%= paciente.nome %>"
+          data-cpf="<%= paciente.cpf %>"
+          data-endereco="<%= paciente.endereco %>"
+          data-nascimento="<%= paciente.nascimento %>"
+          data-fone="<%= paciente.telefone %>"
+          data-whatever="@<%= paciente.nome %>"
+          class="material-icons md-30 md-dark"
+          data-toggle="modal"
+          data-target="#editPacienteModal"
+          href=""
+          >edit</a
+        >
+        <a
+          class="material-icons md-30 md-dark"
+          href="/viagens/?id=<%=paciente._id %> "
+          >commute</a
+        >
+        <a
+          class="material-icons md-30 md-dark"
+          href=""
+          data-toggle="modal"
+          data-target="#suspeitoModal"
+          data-id="<%= paciente._id %>"
+          data-suspeito="true"
+          data-token="<%= token %>"
+          >group_add</a
+        >
+        <a
+          class="material-icons md-30 md-dark"
+          data-id="<%= paciente._id %>"
+          data-target="#quarentenaModal"
+          data-toggle="modal"
+          data-quarentena="true"
+          data-token="<%= token %>"
+          href=""
+          >add_business</a
+        >
+      </div>
+    </div>
+  </div>
+  <% }); %>
+</div>

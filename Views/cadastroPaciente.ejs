@@ -1,15 +1,14 @@
 <%- include('partials/header.ejs'); %>
-      <div class="card shadow mb-8">
+<div class="d-flex justify-content-center">
+      <div class="card shadow col-sm-6 mb-3 mb-sm-0">
         <div class="card-header py-3 bg-white">
           <h5 class="m-0 font-weight-bold text-dark">
-            Cadastro de Pacientes
+            Cadastro de Paciente
           </h5>
         </div>
         <div class="card-body p-0"></div>
-        <!-- Nested Row within Card Body -->
-
         <div class="p-5">
-          <form class="user" method="POST" action="/pacientes">
+          <form class="user" name="formulario" id="formulario" action="/pacientes" method="POST">
             <div class="form-group row">
               <div class="col-sm-6 mb-3 mb-sm-0">
                 <legend style="font-size: 15px;">CPF:</legend>
@@ -30,6 +29,7 @@
               <input
                 name="nome"
                 type="text"
+                id="pacienteNome"
                 required
                 class="form-control form-control-user"
                 id="input_name"
@@ -40,12 +40,29 @@
               <legend style="font-size: 15px;">Endereço:</legend>
               <input
                 required
+                id="pacienteEndereco"
                 name="endereco"
                 type="text"
                 class="form-control form-control-user"
                 id="exampleInputEmail"
                 placeholder="Digite aqui o endereço"
               />
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-6 mb-3 mb-sm-0">
+                <legend style="font-size: 15px;">Bairro:</legend>
+                <select  
+                name = "bairro" 
+                class="custom-select"
+                required>
+                  <option selected>Selecione o bairro</option>
+                  <option value="centro">Centro</option>
+                  <option value="texaco">Texaco</option>
+                  <option value="tancredo neves">Tancredo Neves</option>
+                  <option value="alto da colina">Alto da Colina</option>
+                  <option value="elias david">Elias David</option>
+                </select>
+              </div>
             </div>
             <div class="form-group row">
               <div class="col-sm-6 mb-3 mb-sm-0">
@@ -70,16 +87,6 @@
                   id="exampleInputPassword"
                   placeholder="(00) 00000-0000"
                   data-mask="(00) 00000-0000"
-                />
-              </div>
-              <div class="col-sm-6 mb-3 mb-sm-0">
-                <legend style="font-size: 15px;"></legend>
-                <input
-                  name="token"
-                  type="hidden"
-                  class="form-control form-control-user"
-                  value="<%= token %> "
-                  style="visibility: hidden;"
                 />
               </div>
             </div>
@@ -107,48 +114,11 @@
               <%=msg[0].texto%>
             </div>
             <% } %>
-            <hr />
           </form>
-          <hr />
         </div>
       </div>
+    </div>
+      <%- include("partials/footer.ejs");%> 
 
-    <script src="jquery/jquery.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-    <script src="/js/jquery.mask.min.js"></script>
-    <script>
-      function validaForm() {
-        let nome = "";
-        return false;
-      }
-    </script>
-    <script>
-      function formSubmit() {
-        let dado = {
-          nome: "nyguel",
-        };
-        fetch("http://localhost:3333/pacientes", {
-          method: "POST",
-          body: JSON.stringify(dado),
-        });
-
-        /*
-      $.ajax({
-          url: "http://localhost:3333/pacientes",
-          method: 'POST',
-          data: {"nome":"nyguel"},
-          dataType: 'json',
-        });*/
-      }
-    </script>
   </body>
 </html>
